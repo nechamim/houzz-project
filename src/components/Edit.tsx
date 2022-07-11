@@ -33,12 +33,6 @@ const EditWithRouter = WithRouter(class Edit extends Component<IWithRouterProps,
 
     return (
       <div>
-        {/* <form onSubmit={writeToMusInstFile}>
-          <input type="text" value={this.state.instrument} onChange={(e) => handleChange(e.target.value, "instrument")} />
-          <input type="text" value={this.state.description} onChange={(e) => handleChange(e.target.value, "description")} />
-          <input type="number" value={this.state.price} onChange={(e) => handleChange(e.target.value, 'price')} />
-          <input type="submit" />
-        </form> */}
         <Form onSubmit={writeToMusInstFile}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control type="text" value={this.state.instrument} onChange={(e) => handleChange(e.target.value, "instrument")} />

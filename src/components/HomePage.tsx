@@ -32,10 +32,6 @@ export default class HomePage extends Component<{}, any> {
       <h2>MUSICALL</h2>
       <h3> There are {musicalInstruments.length} musical instruments in store  </h3>
       <Form>
-        {/* <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Control type="text" id="nameForSearch" placeholder='enter musical instrument to search' />
-        </Form.Group>
-        <Button variant="primary" type="submit" onClick={this.search}>🔍</Button> */}
         <InputGroup className="mb-3">
           <Button variant="outline-secondary" id="button-addon1" onClick={this.search}>🔍</Button>
           <FormControl
@@ -51,7 +47,7 @@ export default class HomePage extends Component<{}, any> {
           {/* <Link to={"/view/" + (i)}>{innerItem.instrument} </Link> */}
           {/* <Link to={"/edit/" + (i)}>edit </Link>} */}
           <a href={`/view/${innerItem.id}`}>{innerItem.instrument}</a>
-          <Button variant="outline-primary"><a id='editLink' href={`/edit/${innerItem.id}`}>edit</a></Button></li>)}
+          <Button variant="outline-primary"><a id='editLink' href={`/edit/${innerItem.id}`}>Edit</a></Button></li>)}
       </ul>
     </>
   }
