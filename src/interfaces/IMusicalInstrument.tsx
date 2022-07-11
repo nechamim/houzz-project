@@ -1,4 +1,4 @@
-export interface iMusicalInstruments {
+export interface IMusicalInstruments {
     id: number;
     instrument: string;
     description: string;

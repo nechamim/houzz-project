@@ -1,25 +1,18 @@
 import * as React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import View from './components/View';
+// import ViewWithRouter from './components/View';
 import HomePage from './components/HomePage';
-import Edit from './components/Edit';
 import About from './components/About';
 import { musicalInstruments } from './data/musicalInstruments';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
+import ViewWithRouter from './components/View';
+import EditWithRouter from './components/Edit';
+
 const routes = [{
   route: 'home',
   Component: HomePage,
   name: 'Home',
-},//  {
-//   route: 'view',
-//   Component: View,
-//   name: 'View',
-// }, 
-{
-  route: 'edit',
-  Component: Edit,
-  name: 'Edit',
 }, {
   route: 'about',
   Component: About,
@@ -33,13 +26,17 @@ export default function App() {
       <Router>
         <div>
           <menu>
-            {routes/*.filter(route => route.name != "View" && route.name != "Edit")*/.map(route => <li key={route.route}> <Link to={route.route}> {route.name} </Link> </li>)}
+            {routes.map(route => <li key={route.route}> <Link to={route.route}> {route.name} </Link> </li>)}
           </menu>
           <Routes>
-            <Route path="home" element={<HomePage />} >
-              <Route path=":id" element={<View />} />
-            </Route>
+            <Route path="home/" element={<HomePage />} />
             <Route path="about" element={<About />} />
+            <Route path="view/:id" element={<ViewWithRouter />} />
+            <Route path="edit/:id" element={<EditWithRouter />} />
+            {/* hi Ester, i didn't succeed to do inner router. i will be happy to know why! */}
+            {/* <Route path="home/" element={<HomePage />} >
+              <Route path="edit/:id" element={<EditWithRouter />} />
+            </Route> */}
           </Routes>
         </div>
       </Router>

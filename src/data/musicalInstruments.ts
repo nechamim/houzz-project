@@ -1,6 +1,6 @@
-import { iMusicalInstruments } from "../interfaces/iMusicalInstruments";
+import { IMusicalInstruments } from "../interfaces/IMusicalInstrument";
 
-export const musicalInstruments/*:iMusicalInstruments*/ = [
+export const musicalInstruments : IMusicalInstruments[] = [
     { id: 0, instrument: "viola", description: 'viola, stringed musical instrument, the tenor of the violin family. It is built in proportions similar to those of the violin but has a body length of 37 to 43 cm (14.5 to 17 inches), about 5 cm (2 inches) longer than a violin. Its four strings are tuned c–g–d′–a′, beginning with the C below middle C', price: 8000 },
     { id: 1, instrument: "violin", description: 'a bowed stringed instrument having four strings tuned at intervals of a fifth and a usual range from G below middle C upward for more than 4¹/₂ octaves and having a shallow body, shoulders at right angles to the neck, a fingerboard without frets, and a curved bridge', price: 5000 },
     { id: 2, instrument: "classic guitar", description: 'an acoustic wooden string instrument with strings made of gut or nylon, it is a precursor of the modern acoustic and electric guitars, both of which use metal strings. Classical guitars derive from the Spanish vihuela and gittern of the fifteenth and sixteenth century', price: 800 },

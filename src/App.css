@@ -41,3 +41,8 @@ li {
   cursor: pointer;
   list-style: none;
 }
+
+#editLink {
+  text-decoration: none;
+  color: #282c34;
+}

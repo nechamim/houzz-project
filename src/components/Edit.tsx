@@ -1,19 +1,15 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { musicalInstruments } from '../data/musicalInstruments';
+import WithRouter, { IWithRouterProps } from './WithRouter';
+import Form from 'react-bootstrap/Form'
+import { Button } from 'react-bootstrap';
 
-interface EditProps {
-  id: number;
-}
+const EditWithRouter = WithRouter(class Edit extends Component<IWithRouterProps, any> {
+  id = parseInt(this.props.params.id ? this.props.params.id : "0");
 
-export default class Edit extends Component<EditProps, any> {
-
-  constructor(props: EditProps) {
-    super(props)
-    this.state = { instrument: musicalInstruments[props.id].instrument, description: musicalInstruments[props.id].description, price: musicalInstruments[props.id].price };
-  }
+  state = { instrument: musicalInstruments[this.id].instrument, description: musicalInstruments[this.id].description, price: musicalInstruments[this.id].price };
 
   render() {
-    const { id } = this.props;
     const handleChange = (changedValue: string, field: string) => {
       console.log(changedValue);
       switch (field) {
@@ -30,20 +26,33 @@ export default class Edit extends Component<EditProps, any> {
     };
 
     const writeToMusInstFile = () => {
-      musicalInstruments[id].instrument = this.state.instrument;
-      musicalInstruments[id].description = this.state.description;
-      musicalInstruments[id].price = this.state.price;
+      musicalInstruments[this.id].instrument = this.state.instrument;
+      musicalInstruments[this.id].description = this.state.description;
+      musicalInstruments[this.id].price = this.state.price;
     }
 
     return (
       <div>
-        <form onSubmit={writeToMusInstFile}>
+        {/* <form onSubmit={writeToMusInstFile}>
           <input type="text" value={this.state.instrument} onChange={(e) => handleChange(e.target.value, "instrument")} />
           <input type="text" value={this.state.description} onChange={(e) => handleChange(e.target.value, "description")} />
           <input type="number" value={this.state.price} onChange={(e) => handleChange(e.target.value, 'price')} />
           <input type="submit" />
-        </form>
+        </form> */}
+        <Form onSubmit={writeToMusInstFile}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Control type="text" value={this.state.instrument} onChange={(e) => handleChange(e.target.value, "instrument")} />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Control type="text" value={this.state.description} onChange={(e) => handleChange(e.target.value, "description")} />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Control type="number" value={this.state.price} onChange={(e) => handleChange(e.target.value, 'price')} />
+          </Form.Group>
+          <Button variant="primary" type="submit">Submit</Button>
+        </Form>
       </div>
     );
   }
-}
+})
+export default EditWithRouter;

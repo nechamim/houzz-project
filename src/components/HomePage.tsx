@@ -1,52 +1,58 @@
 import React, { Component } from 'react';
 import { musicalInstruments } from '../data/musicalInstruments';
-import View from './View';
-import Edit from './Edit';
-import { Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { IMusicalInstruments } from '../interfaces/IMusicalInstrument';
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import InputGroup from 'react-bootstrap/InputGroup'
+import { FormControl } from 'react-bootstrap';
 export default class HomePage extends Component<{}, any> {
-
+  miFiltered: IMusicalInstruments[] | undefined;
   constructor(props: any) {
     super(props)
-    this.state = { filteredList: [], selectedIM: "" };
+    this.state = {
+      filteredList: musicalInstruments,
+      strForSearch: ""
+    };
   }
-  // changeState = (id: number) => {
-  //   console.log("in on click" + id);
-  //   this.setState({id});
-  // };
 
+  search = () => {
+    console.log("i am in search");
+    const str = (document.getElementById('nameForSearch') as HTMLInputElement).value;
+    this.miFiltered = musicalInstruments.filter(mi => mi.instrument.startsWith(str));
+    console.log(' selectedIM: ' + this.miFiltered[0].instrument);
+    this.setState({ filteredList: this.miFiltered, strForSearch: str });
+  }
 
 
   render() {
-    const search = () => {
-      // this.setState({selectedIM: (document.getElementById('nameForSearch') as HTMLInputElement).value});
-      const str = (document.getElementById('nameForSearch') as HTMLInputElement).value;
-      let miFiltered = musicalInstruments.filter(im => im.instrument.startsWith(str)).map(filteredMI => (
-        <li>
-          {filteredMI.instrument}
-        </li>))
-      console.log(' selectedIM: ' + miFiltered[0]);
-    }
-
     return <>
+      {console.log("i am loading")
+      }
       <h2>MUSICALL</h2>
       <h3> There are {musicalInstruments.length} musical instruments in store  </h3>
-      {/*<View id={this.state.id} />*/}
-      {/* <Edit id={this.state.id} />  */}
-      <form>
-        <input type="text" name="nameForSearch" placeholder='enter nusical instrument to search' />
-        <button onClick={() => search()}>🔍</button>
-      </form>
+      <Form>
+        {/* <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Control type="text" id="nameForSearch" placeholder='enter musical instrument to search' />
+        </Form.Group>
+        <Button variant="primary" type="submit" onClick={this.search}>🔍</Button> */}
+        <InputGroup className="mb-3">
+          <Button variant="outline-secondary" id="button-addon1" onClick={this.search}>🔍</Button>
+          <FormControl
+            aria-label="Example text with button addon"
+            aria-describedby="basic-addon1"
+            type="text" id="nameForSearch" placeholder='enter musical instrument to search'
+          />
+        </InputGroup>
+      </Form>
       <ul className="products">
-        {musicalInstruments.map((innerItem, i) => <li>
-          <Link to={"/view/" + (i)}>{innerItem.instrument} </Link></li>)}
-        {/* <button onClick={() => this.changeState(i)}>edit</button> */}
-        {/* <button> <Link to={"/product" + ( i )}>Enter </Link> </button> */}
+        {this.state.filteredList.map((innerItem: IMusicalInstruments) => <li>
+          {/* hi Ester, i didn't succeed to do inner router. i will be happy to know why! */}
+          {/* <Link to={"/view/" + (i)}>{innerItem.instrument} </Link> */}
+          {/* <Link to={"/edit/" + (i)}>edit </Link>} */}
+          <a href={`/view/${innerItem.id}`}>{innerItem.instrument}</a>
+          <Button variant="outline-primary"><a id='editLink' href={`/edit/${innerItem.id}`}>edit</a></Button></li>)}
       </ul>
-      <div>
-        <h3>Selected Musical Instrument</h3>
-        <Outlet />
-      </div>
-
     </>
   }
 }
