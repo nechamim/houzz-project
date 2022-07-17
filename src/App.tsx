@@ -1,13 +1,13 @@
-import * as React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import ViewWithRouter from './components/View';
 import HomePage from './components/HomePage';
 import About from './components/About';
 import { musicalInstruments } from './data/musicalInstruments';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
-import ViewWithRouter from './components/View';
-import EditWithRouter from './components/Edit';
+import ReadWithRouter from './components/Read';
+import UpdateWithRouter from './components/Update';
+import DeleteWithRouter from './components/Delete';
+import Create from './components/Create';
 
 const routes = [{
   route: 'home',
@@ -31,11 +31,13 @@ export default function App() {
           <Routes>
             <Route path="home/" element={<HomePage />} />
             <Route path="about" element={<About />} />
-            <Route path="view/:id" element={<ViewWithRouter />} />
-            <Route path="edit/:id" element={<EditWithRouter />} />
+            <Route path="read/:id" element={<ReadWithRouter />} />
+            <Route path="update/:id" element={<UpdateWithRouter />} />
+            <Route path="delete/:id" element={<DeleteWithRouter />} />
+            <Route path="add/" element={<Create />} />
             {/* hi Ester, i didn't succeed to do inner router. i will be happy to know why! */}
             {/* <Route path="home/" element={<HomePage />} >
-              <Route path="edit/:id" element={<EditWithRouter />} />
+              <Route path="update/:id" element={<UpdateWithRouter />} />
             </Route> */}
           </Routes>
         </div>

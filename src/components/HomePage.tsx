@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { musicalInstruments } from '../data/musicalInstruments';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { IMusicalInstruments } from '../interfaces/IMusicalInstrument';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
@@ -11,26 +10,32 @@ export default class HomePage extends Component<{}, any> {
   constructor(props: any) {
     super(props)
     this.state = {
-      filteredList: musicalInstruments,
+      filteredList: [{ id: 0, instrument: "", description: "", price: 0 }],
       strForSearch: ""
     };
   }
 
+  async componentDidMount() {
+    const response = await fetch('http://localhost:8080/music/');
+    const data = await response.json();
+    this.setState({ filteredList: data.musicalInstruments })
+  }
+
   search = () => {
+    const { filteredList } = this.state;
     console.log("i am in search");
     const str = (document.getElementById('nameForSearch') as HTMLInputElement).value;
-    this.miFiltered = musicalInstruments.filter(mi => mi.instrument.startsWith(str));
-    console.log(' selectedIM: ' + this.miFiltered[0].instrument);
+    this.miFiltered = filteredList.filter((mi: IMusicalInstruments) => mi.instrument.startsWith(str));
+    // console.log(' selectedIM: ' + this.miFiltered[0].instrument);
     this.setState({ filteredList: this.miFiltered, strForSearch: str });
   }
 
 
   render() {
-    return <>
-      {console.log("i am loading")
-      }
+    const { filteredList } = this.state;
+    return <div className="card text-center m-3">
       <h2>MUSICALL</h2>
-      <h3> There are {musicalInstruments.length} musical instruments in store  </h3>
+      <h3> There are {filteredList.length} musical instruments in store  </h3>
       <Form>
         <InputGroup className="mb-3">
           <Button variant="outline-secondary" id="button-addon1" onClick={this.search}>🔍</Button>
@@ -41,14 +46,14 @@ export default class HomePage extends Component<{}, any> {
           />
         </InputGroup>
       </Form>
-      <ul className="products">
-        {this.state.filteredList.map((innerItem: IMusicalInstruments) => <li>
-          {/* hi Ester, i didn't succeed to do inner router. i will be happy to know why! */}
-          {/* <Link to={"/view/" + (i)}>{innerItem.instrument} </Link> */}
-          {/* <Link to={"/edit/" + (i)}>edit </Link>} */}
-          <a href={`/view/${innerItem.id}`}>{innerItem.instrument}</a>
-          <Button variant="outline-primary"><a id='editLink' href={`/edit/${innerItem.id}`}>Edit</a></Button></li>)}
-      </ul>
-    </>
+      <div className="card-body">
+        <ul>
+          {filteredList.map((innerItem: IMusicalInstruments) => <li key={innerItem.id}>
+            <a href={`/read/${innerItem.id}`}>{innerItem.instrument}</a>
+            </li>)}
+        </ul>
+        <Button variant="outline-primary"><a id='create' href={`/add`}>Add</a></Button>
+      </div>
+    </div>
   }
 }
