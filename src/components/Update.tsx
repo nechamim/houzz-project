@@ -3,6 +3,8 @@ import WithRouter, { IWithRouterProps } from './WithRouter';
 import Form from 'react-bootstrap/Form'
 import { Button } from 'react-bootstrap';
 import { IMusicalInstruments } from '../interfaces/IMusicalInstrument';
+import HomePage from './HomePage';
+import { Link } from 'react-router-dom';
 
 
 interface IUpdateProps {
@@ -13,27 +15,26 @@ const UpdateWithRouter = WithRouter(class Update extends Component<IWithRouterPr
   id = parseInt(this.props.params.id ? this.props.params.id : "0");
 
   state = {
-    musicalInstrument: { id: 0, instrument: "", description: "", price: 0 }
+    musicalInstrument: { id: 0, instrument: " ", description: " ", price: 0 }
   }
 
   componentDidMount() {
     fetch(`http://localhost:8080/music/${this.id}`)
       .then(response => response.json())
       .then(data => this.setState({ musicalInstrument: data }));
-    // this.setState({ musicalInstrument: data })
   }
 
   callToServer = () => {
+    console.log("instrument: " + this.state.musicalInstrument.instrument + ", description: " + this.state.musicalInstrument.description);
     fetch(`http://localhost:8080/music/${this.id}`, {
       method: 'PUT',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(this.state.musicalInstrument)
     })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => console.log("data: "+ data))
       .catch(error => console.error('Unable to update item.', error));
   }
 
@@ -69,7 +70,8 @@ const UpdateWithRouter = WithRouter(class Update extends Component<IWithRouterPr
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control type="number" value={musicalInstrument.price} onChange={(e) => handleChange(e.target.value, 'price')} />
           </Form.Group>
-          <Button variant="primary" type="submit">Submit</Button>
+          <Button variant="primary" type="submit">
+          <Link to={`/home`} id={"link"}>Submit</Link></Button>
         </Form>
       </div>
     );

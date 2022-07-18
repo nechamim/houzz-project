@@ -25,8 +25,7 @@ export default class HomePage extends Component<{}, any> {
     const { filteredList } = this.state;
     console.log("i am in search");
     const str = (document.getElementById('nameForSearch') as HTMLInputElement).value;
-    this.miFiltered = filteredList.filter((mi: IMusicalInstruments) => mi.instrument.startsWith(str));
-    // console.log(' selectedIM: ' + this.miFiltered[0].instrument);
+    this.miFiltered = filteredList.filter((mi: IMusicalInstruments) => mi.instrument ? mi.instrument.startsWith(str): true);
     this.setState({ filteredList: this.miFiltered, strForSearch: str });
   }
 
@@ -38,7 +37,7 @@ export default class HomePage extends Component<{}, any> {
       <h3> There are {filteredList.length} musical instruments in store  </h3>
       <Form>
         <InputGroup className="mb-3">
-          <Button variant="outline-secondary" id="button-addon1" onClick={this.search}>🔍</Button>
+          <Button variant="primary" id="button-addon1" onClick={this.search}>🔍</Button>
           <FormControl
             aria-label="Example text with button addon"
             aria-describedby="basic-addon1"
@@ -52,7 +51,7 @@ export default class HomePage extends Component<{}, any> {
             <a href={`/read/${innerItem.id}`}>{innerItem.instrument}</a>
             </li>)}
         </ul>
-        <Button variant="outline-primary"><a id='create' href={`/add`}>Add</a></Button>
+        <Button variant="primary"><Link to={`/add`} id={"link"}>Add</Link></Button>
       </div>
     </div>
   }

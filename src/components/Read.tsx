@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import WithRouter, { IWithRouterProps } from './WithRouter'
 const ReadWithRouter = WithRouter(class Read extends React.Component<IWithRouterProps, any> {
   id = parseInt(this.props.params.id ? this.props.params.id : "0");
@@ -21,8 +21,8 @@ const ReadWithRouter = WithRouter(class Read extends React.Component<IWithRouter
       <h1>{musicalInstrument.instrument}</h1>
       <p>{musicalInstrument.description}</p><br />
       <p>price: {musicalInstrument.price}</p>
-      <Button variant="outline-primary"><a id='updateLink' href={`/update/${musicalInstrument.id}`}>Update</a></Button>
-      <Button variant="outline-primary"><a id='deleteLink' href={`/delete/${musicalInstrument.id}`}>Delete</a></Button>
+      <Button variant="outline-primary"><Link to={`/update/${musicalInstrument.id}`} id={"link"}>Update</Link></Button>
+      <Button variant="outline-primary"><Link to={`/delete/${musicalInstrument.id}`} id={"link"}>Delete</Link></Button>
     </div>
   }
 })

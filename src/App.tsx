@@ -2,7 +2,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './components/HomePage';
 import About from './components/About';
-import { musicalInstruments } from './data/musicalInstruments';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 import ReadWithRouter from './components/Read';
 import UpdateWithRouter from './components/Update';
@@ -20,7 +19,6 @@ const routes = [{
 },];
 
 export default function App() {
-  const instrument1 = musicalInstruments[0].instrument;
   return (
     <div className="App">
       <Router>

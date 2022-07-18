@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import HomePage from './HomePage';
+
 export default class Create extends React.Component<{}, any> {
 
     state = {
@@ -12,9 +14,11 @@ export default class Create extends React.Component<{}, any> {
         debugger
         fetch('http://localhost:8080/music/', {
             method: 'POST',
+            mode: "cors",
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/json',
+                // 'Access-Control-Allow-Origin':"*"
             },
             body: JSON.stringify(this.state.musicalInstrument)
         })
@@ -30,8 +34,7 @@ export default class Create extends React.Component<{}, any> {
             switch (field) {
                 case "instrument":
                     console.log("I am in musicalInstrument.instrument: " + musicalInstrument.instrument);
-                    this.setState({ musicalInstrument: { 
-                        instrument: changedValue } });
+                    this.setState({ musicalInstrument: { instrument: changedValue } });
                     break;
                 case "description":
                     console.log("i am in  musicalInstrument.description: " + musicalInstrument.description);
@@ -49,7 +52,7 @@ export default class Create extends React.Component<{}, any> {
             <div>
                 <Form onSubmit={this.callToServer}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control type="text" value={musicalInstrument.instrument} onChange={(e) => handleChange(e.target.value, "instrument")} />
+                        <Form.Control type="text" value={musicalInstrument.instrument } onChange={(e) => handleChange(e.target.value, "instrument")} />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Control type="text" value={musicalInstrument.description} onChange={(e) => handleChange(e.target.value, "description")} />
