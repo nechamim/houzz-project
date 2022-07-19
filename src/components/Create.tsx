@@ -23,9 +23,7 @@ export default class Create extends React.Component<{}, any> {
             body: JSON.stringify(this.state.musicalInstrument)
         };
         const response = await fetch('http://localhost:8080/music/', requestOptions);
-        const data = await response.json();
-        console.log("data: " + data)
-        debugger
+        await response.json();
     }
 
     render() {

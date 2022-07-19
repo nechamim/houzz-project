@@ -18,14 +18,15 @@ export default class HomePage extends Component<{}, any> {
   async componentDidMount() {
     const response = await fetch('http://localhost:8080/music/');
     const data = await response.json();
-    this.setState({ filteredList: data.musicalInstruments })
+    console.log("data: " + data);
+    this.setState({ filteredList: data })
   }
 
   search = () => {
     const { filteredList } = this.state;
     console.log("i am in search");
     const str = (document.getElementById('nameForSearch') as HTMLInputElement).value;
-    this.miFiltered = filteredList.filter((mi: IMusicalInstruments) => mi.instrument ? mi.instrument.startsWith(str): true);
+    this.miFiltered = filteredList.filter((mi: IMusicalInstruments) => mi.instrument ? mi.instrument.startsWith(str) : true);
     this.setState({ filteredList: this.miFiltered, strForSearch: str });
   }
 
@@ -49,7 +50,7 @@ export default class HomePage extends Component<{}, any> {
         <ul>
           {filteredList.map((innerItem: IMusicalInstruments) => <li key={innerItem.id}>
             <a href={`/read/${innerItem.id}`}>{innerItem.instrument}</a>
-            </li>)}
+          </li>)}
         </ul>
         <Button variant="primary"><Link to={`/add`} id={"link"}>Add</Link></Button>
       </div>

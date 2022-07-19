@@ -5,24 +5,15 @@ import WithRouter, { IWithRouterProps } from './WithRouter'
 const DeleteWithRouter = WithRouter(class Delete extends React.Component<IWithRouterProps, any> {
   id = parseInt(this.props.params.id ? this.props.params.id : "0");
 
-  componentDidMount() {
-
-    fetch(`http://localhost:8080/music//${this.id}`, {
-      method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      }
-    })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error('Unable to delete item.', error));
+  async componentDidMount() {
+    const response = await fetch(`http://localhost:8080/music//${this.id}`, { method: 'DELETE' });
+    const data = await response.json();
+    console.log(data);
   }
 
   render() {
     return <div>
-<HomePage />
-      {/* <Link to={"/home"}></Link> */}
+      {/* <HomePage /> */}
     </div>
   }
 })

@@ -6,41 +6,21 @@ import { IMusicalInstruments } from '../interfaces/IMusicalInstrument';
 import HomePage from './HomePage';
 import { Link } from 'react-router-dom';
 
-
-interface IUpdateProps {
-  music: IMusicalInstruments;
-}
-
 const UpdateWithRouter = WithRouter(class Update extends Component<IWithRouterProps/* & IUpdateProps*/, any> {
-  id = parseInt(this.props.params.id ? this.props.params.id : "0");
+  id :number;
   newItem: IMusicalInstruments;
   constructor(props: any) {
       super(props);
+      this.id = parseInt(this.props.params.id ? this.props.params.id : "0");
       this.newItem = { id: 0, instrument: " ", description: " ", price: 0 };
-      this.state = {
-          musicalInstrument: { id: 0, instrument: "", description: "", price: 0 }
-      }
+      this.state = { musicalInstrument: { id: 0, instrument: "", description: "", price: 0 }}
   }
 
-  componentDidMount() {
-    fetch(`http://localhost:8080/music/${this.id}`)
-      .then(response => response.json())
-      .then(data => this.setState({ musicalInstrument: data }));
+  async componentDidMount() {
+    const response = await fetch(`http://localhost:8080/music/${this.id}`);
+    const data = await response.json();
+    this.setState({ musicalInstrument: data })
   }
-
-  // callToServer = () => {
-  //   console.log("instrument: " + this.state.musicalInstrument.instrument + ", description: " + this.state.musicalInstrument.description);
-  //   fetch(`http://localhost:8080/music/${this.id}`, {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(this.state.musicalInstrument)
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => console.log("data: "+ data))
-  //     .catch(error => console.error('Unable to update item.', error));
-  // }
 
   async callToServer () {
     console.log("instrument: " + this.state.musicalInstrument.instrument + ", description: " + this.state.musicalInstrument.description);
