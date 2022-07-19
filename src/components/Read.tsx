@@ -18,9 +18,9 @@ const ReadWithRouter = WithRouter(class Read extends React.Component<IWithRouter
   render() {
     const { musicalInstrument } = this.state;
     return <div>
-      <h1>{musicalInstrument.instrument}</h1>
+      <h1>{musicalInstrument.instrument.charAt(0).toUpperCase() + musicalInstrument.instrument.slice(1)}</h1>
       <p>{musicalInstrument.description}</p><br />
-      <p>price: {musicalInstrument.price}</p>
+      <p>price: {musicalInstrument.price}$</p>
       <Button variant="outline-primary"><Link to={`/update/${musicalInstrument.id}`} id={"link"}>Update</Link></Button>
       <Button variant="outline-primary"><Link to={`/delete/${musicalInstrument.id}`} id={"link"}>Delete</Link></Button>
     </div>
