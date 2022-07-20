@@ -12,14 +12,14 @@ const UpdateWithRouter = WithRouter(class Update extends Component<IWithRouterPr
   constructor(props: any) {
       super(props);
       this.id = parseInt(this.props.params.id ? this.props.params.id : "0");
-      this.newItem = { id: 0, instrument: " ", description: " ", price: 0 };
-      this.state = { musicalInstrument: { id: 0, instrument: "", description: "", price: 0 }}
+      this.newItem = { _id: "", instrument: "", description: "", price: 0 };
+      this.state = { musicalInstrument: { _id: "", instrument: "", description: "", price: 0 }}
   }
 
   async componentDidMount() {
     const response = await fetch(`http://localhost:8080/music/${this.id}`);
     const data = await response.json();
-    this.setState({ musicalInstrument: data })
+    this.setState({ musicalInstrument: data[0] })
   }
 
   async callToServer () {

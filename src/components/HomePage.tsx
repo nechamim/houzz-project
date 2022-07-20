@@ -10,7 +10,7 @@ export default class HomePage extends Component<{}, any> {
   constructor(props: any) {
     super(props)
     this.state = {
-      filteredList: [{ id: 0, instrument: "", description: "", price: 0 }],
+      filteredList: [{ _id: "", instrument: "", description: "", price: 0 }],
       strForSearch: ""
     };
   }
@@ -48,8 +48,8 @@ export default class HomePage extends Component<{}, any> {
       </Form>
       <div className="card-body">
         <ul>
-          {filteredList.map((innerItem: IMusicalInstruments) => <li key={innerItem.id}>
-            <a href={`/read/${innerItem.id}`}>{innerItem.instrument}</a>
+          {filteredList.map((innerItem: IMusicalInstruments) => <li key={innerItem._id}>
+            <Link to={`/read/${innerItem._id}`}>{innerItem.instrument}</Link>
           </li>)}
         </ul>
         <Button variant="primary"><Link to={`/add`} id={"link"}>Add</Link></Button>

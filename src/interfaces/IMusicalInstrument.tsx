@@ -1,5 +1,5 @@
 export interface IMusicalInstruments {
-    id: number;
+    _id: string;
     instrument: string;
     description: string;
     price: number;

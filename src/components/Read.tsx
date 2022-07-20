@@ -15,7 +15,8 @@ const ReadWithRouter = WithRouter(class Read extends React.Component<IWithRouter
   async componentDidMount() {
     const response = await fetch(`http://localhost:8080/music/${this.id}`);
     const data = await response.json();
-    this.setState({ musicalInstrument: data })
+    console.log("data:  " + data)
+    this.setState({ musicalInstrument: data[0] })
   }
 
   render() {

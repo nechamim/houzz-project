@@ -8,9 +8,9 @@ export default class Create extends React.Component<{}, any> {
     newItem: IMusicalInstruments;
     constructor(props: any) {
         super(props);
-        this.newItem = { id: 0, instrument: " ", description: " ", price: 0 };
+        this.newItem = { _id: "", instrument: " ", description: " ", price: 0 };
         this.state = {
-            musicalInstrument: { id: 0, instrument: "", description: "", price: 0 }
+            musicalInstrument: { _id: "", instrument: "", description: "", price: 0 }
         }
     }
 
