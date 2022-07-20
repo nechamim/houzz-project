@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/houzz-project/static/css/main.e05b0fce.css",
-    "main.js": "/houzz-project/static/js/main.8cd48eec.js",
+    "main.css": "/houzz-project/static/css/main.55bd35cc.css",
+    "main.js": "/houzz-project/static/js/main.d79c6152.js",
     "static/js/787.28cb0dcd.chunk.js": "/houzz-project/static/js/787.28cb0dcd.chunk.js",
     "index.html": "/houzz-project/index.html",
-    "main.e05b0fce.css.map": "/houzz-project/static/css/main.e05b0fce.css.map",
-    "main.8cd48eec.js.map": "/houzz-project/static/js/main.8cd48eec.js.map",
+    "main.55bd35cc.css.map": "/houzz-project/static/css/main.55bd35cc.css.map",
+    "main.d79c6152.js.map": "/houzz-project/static/js/main.d79c6152.js.map",
     "787.28cb0dcd.chunk.js.map": "/houzz-project/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e05b0fce.css",
-    "static/js/main.8cd48eec.js"
+    "static/css/main.55bd35cc.css",
+    "static/js/main.d79c6152.js"
   ]
 }
