@@ -3,10 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './components/HomePage';
 import About from './components/About';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
-import ReadWithRouter from './components/Read';
-import UpdateWithRouter from './components/Update';
-import DeleteWithRouter from './components/Delete';
-import Create from './components/Create';
+import Read from './components/Read';
+import Delete from './components/Delete';
+import UpdateAndCreate from './components/UpdateAndCreate';
 
 const routes = [{
   route: 'home',
@@ -29,14 +28,10 @@ export default function App() {
           <Routes>
             <Route path="home/" element={<HomePage />} />
             <Route path="about" element={<About />} />
-            <Route path="read/:id" element={<ReadWithRouter />} />
-            <Route path="update/:id" element={<UpdateWithRouter />} />
-            <Route path="delete/:id" element={<DeleteWithRouter />} />
-            <Route path="add/" element={<Create />} />
-            {/* hi Ester, i didn't succeed to do inner router. i will be happy to know why! */}
-            {/* <Route path="home/" element={<HomePage />} >
-              <Route path="update/:id" element={<UpdateWithRouter />} />
-            </Route> */}
+            <Route path="view/:id" element={<Read />} />
+            <Route path="delete/:id" element={<Delete />} />
+            <Route path="update/:id" element={<UpdateAndCreate/>} />
+            <Route path="add/" element={<UpdateAndCreate/>} />
           </Routes>
         </div>
       </Router>

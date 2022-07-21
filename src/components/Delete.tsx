@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HomePage from './HomePage';
 import WithRouter, { IWithRouterProps } from './WithRouter'
-const DeleteWithRouter = WithRouter(class Delete extends React.Component<IWithRouterProps, any> {
-  id = parseInt(this.props.params.id ? this.props.params.id : "0");
+class Delete extends React.Component<IWithRouterProps, any> {
+  id = this.props.params.id ? this.props.params.id : "";
 
   async componentDidMount() {
     const response = await fetch(`http://localhost:8080/music//${this.id}`, { method: 'DELETE' });
@@ -16,5 +16,5 @@ const DeleteWithRouter = WithRouter(class Delete extends React.Component<IWithRo
       {/* <HomePage /> */}
     </div>
   }
-})
-export default DeleteWithRouter;
+}
+export default WithRouter(Delete);

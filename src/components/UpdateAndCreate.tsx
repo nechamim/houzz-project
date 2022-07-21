@@ -1,28 +1,42 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { IMusicalInstruments } from '../interfaces/IMusicalInstrument';
-import HomePage from './HomePage';
+import WithRouter, { IWithRouterProps } from './WithRouter';
 
-export default class Create extends React.Component<{}, any> {
+class UpdateAndCreate extends React.Component<IWithRouterProps, any> {
     newItem: IMusicalInstruments;
+    id: string;
+
     constructor(props: any) {
         super(props);
-        this.newItem = { _id: "", instrument: " ", description: " ", price: 0 };
-        this.state = {
-            musicalInstrument: { _id: "", instrument: "", description: "", price: 0 }
+        this.id = this.props.params.id ? this.props.params.id : "";
+        this.newItem = { _id: "", instrument: "", description: "", price: 0 };
+        this.state = { musicalInstrument: { _id: this.id, instrument: "", description: "", price: 0 } }
+    }
+
+    async componentDidMount() {
+        if (this.id != "") {
+            const response = await fetch(`http://localhost:8080/music/${this.id}`);
+            const data = await response.json();
+            this.setState({ musicalInstrument: data[0] })
         }
     }
 
-
-    async callToServer () {
+    async callToServer() {
+        let _method: string;
+        // create new product
+        if(this.id === "") {
+            _method = 'POST';
+        }
+        // update product
+        else _method = 'PUT';
         console.log("instrument: " + this.state.musicalInstrument.instrument + ", description: " + this.state.musicalInstrument.description);
-          const requestOptions = {
-            method: 'POST',
+        const requestOptions = {
+            method: _method,
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(this.state.musicalInstrument)
         };
-        const response = await fetch('http://localhost:8080/music/', requestOptions);
+        const response = await fetch(`http://localhost:8080/music/${this.id}`, requestOptions);
         await response.json();
     }
 
@@ -52,7 +66,7 @@ export default class Create extends React.Component<{}, any> {
 
         return (
             <div>
-                <Form onSubmit={() =>  this.callToServer()}>
+                <Form onSubmit={() => this.callToServer()}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Control type="text" value={musicalInstrument.instrument} onChange={(e) => handleChange(e.target.value, "instrument")} />
                     </Form.Group>
@@ -68,3 +82,4 @@ export default class Create extends React.Component<{}, any> {
         );
     }
 }
+export default WithRouter(UpdateAndCreate);

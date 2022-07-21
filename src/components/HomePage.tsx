@@ -49,10 +49,10 @@ export default class HomePage extends Component<{}, any> {
       <div className="card-body">
         <ul>
           {filteredList.map((innerItem: IMusicalInstruments) => <li key={innerItem._id}>
-            <Link to={`/read/${innerItem._id}`}>{innerItem.instrument}</Link>
+            <Link to={`/view/${innerItem._id}`}>{innerItem.instrument}</Link>
           </li>)}
         </ul>
-        <Button variant="primary"><Link to={`/add`} id={"link"}>Add</Link></Button>
+        <Button variant="outline-primary"><Link to={`/add`} id={"link"}>Add</Link></Button>
       </div>
     </div>
   }
